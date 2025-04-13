@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Air Quality Index Application </title>
+    <style>
+        label{
+            font-family: monospace;
+            color: #000000;
+            font-weight: 5px;
+        }
+        input{
+            display: flex;
+            background-color: rgb(255, 255, 255);
+            box-shadow: 5px 5px 5px lightblue;
+            color: rgb(0, 0, 0);
+            flex-direction: column;
+            justify-content: space-evenly;
+            justify-items: center;
+            align-items: center;
+            font-family:  monospace;
+            border-radius: 5px;
+        }
+        form{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #submit
+        {
+            border:none;
+            border-radius: 5px;
+            color: rgb(0, 53, 63);
+            background-color: greenyellow;
+            margin-top: 15px;
+            width: 80px;
+            height: 20px;
+            font-family: monospace;
+            font-weight: bold;
+        }
+        #registration{
+            border: 5px solid;
+            width: 600px;
+            height: 300px;
+            background-color: #fdfdfd;
+            transition: 0.5s ease-out;
+            overflow: hidden;
+        }
+        #registration:hover {
+        content-visibility: visible;
+        box-shadow: 10px 10px lightblue;
+        height: 600px;
+        width: 700px;
+        }
+        .form1{
+            content-visibility: hidden;
+            animation: 0.7s ease-out;
+        }
+        #registration:hover .form1{
+            content-visibility: visible;
+        }
+        .regtext{
+            content-visibility: visible;
+            animation:0.5s ease-out;
+            font-size: 5em;
+        }
+        #registration:hover .regtext{
+            content-visibility: hidden;
+            display: none;
+        }
+        #cloud{
+            color: white;
+            text-shadow: 5px 5px #000000b4;
+        }
+    </style>
+    <script src="script.js"></script>
+</head>
+<body style="background-color: greenyellow;">
+    <div style="display: flex;flex-wrap: wrap;justify-content: center;">
+    <div style="display: flex;justify-content: center;margin: none;">
+        <h3 style="font-family: monospace;font-weight: 20px;font-size: 4em;
+    color: rgb(0, 0, 0);font-weight: bolder;
+    margin-bottom: 10px;margin-top: 2px;">AQI APPLICATION <span id="cloud">☁︎</span> </h3>
+    </div>
+    <div style="display: flex; justify-content: center; gap: 10px;">
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div style="border: 5px solid; width: 550px; height: 300px;background-color: #fdfdfd;">box1</div>
+            <div style="border: 5px solid; width: 550px; height: 300px;background-color: #fdfdfd;">box2</div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div id="registration">
+                <span class="regtext" style="display: flex;justify-content: center; align-items: center;font-family: monospace;">REGISTRATION</span>
+                <form class="form1">
+                    <label for="fname" style="margin: 5px;">FirstName</label>
+                    <input id="fname" type="text" style="margin: 5px;" placeholder="FirstName">
+                    <label for="lname">LastName</label>
+                    <input id="lname" type="text" style="margin: 5px;" placeholder="LastName">
+                    <label for="mail" style="margin-left: 5px;">email</label>
+                    <input id="mail" type="email" style="margin: 5px;" placeholder="e-mail">
+                    <label for="pass" style="margin: 5px;">Password</label>
+                    <input id="pass" type="password" style="margin: 5px;" placeholder="Password">
+                    <label for="Cpass" style="margin: 5px;">Confirm Password</label>
+                    <input id="Cpass" type="password" style="margin: 5px;" placeholder="Confirm_Password">
+                    <br>
+                    <label for="location" style="margin: 5px;">Location</label>
+                    <input id="location" type="text" style="margin: 5px;" placeholder="Location">
+                    <label for="zcode" style="margin: 5px;">zipcode</label>
+                    <input id="zcode" type="text" style="margin: 5px;" placeholder="Location">
+                    <br>
+                    <label for="zcode" style="margin: 5px;">List of Preffered City</label>
+                    <select id="city" style="box-shadow: 5px 5px 5px lightblue;">
+                        <option value="Dhaka">Dhaka</option>
+                        <option value="Dhaka">Chattogram</option>
+                        <option value="Dhaka">Sylhet</option>
+                        <option value="Dhaka">Rajshahi</option>
+                    </select>
+                    <button type="submit" id="submit">submit</button>
+                    
+
+                </form>
+            </div>
+            <div style="border: 5px solid; width: 600px; height: 300px;background-color: #fdfdfd;">box4</div>
+        </div>
+    </div> 
+    </div>   
+</body>
+</html>
