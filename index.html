@@ -74,7 +74,6 @@
             text-shadow: 5px 5px #000000b4;
         }
     </style>
-    <script src="script.js"></script>
 </head>
 <body style="background-color: greenyellow;">
     <div style="display: flex;flex-wrap: wrap;justify-content: center;">
@@ -91,9 +90,9 @@
         <div style="display: flex; flex-direction: column; gap: 10px;">
             <div id="registration">
                 <span class="regtext" style="display: flex;justify-content: center; align-items: center;font-family: monospace;">REGISTRATION</span>
-                <form class="form1">
+                <form class="form1" id="form1">
                     <label for="fname" style="margin: 5px;">FirstName</label>
-                    <input id="fname" type="text" style="margin: 5px;" placeholder="FirstName">
+                    <input id="fname" type="text" style="margin: 5px;" placeholder="FirstName"><span id="fnameerror"></span>
                     <label for="lname">LastName</label>
                     <input id="lname" type="text" style="margin: 5px;" placeholder="LastName">
                     <label for="mail" style="margin-left: 5px;">email</label>
@@ -123,6 +122,8 @@
             <div style="border: 5px solid; width: 600px; height: 300px;background-color: #fdfdfd;">box4</div>
         </div>
     </div> 
-    </div>   
+    </div>  
+    
+    <script src="script.js"></script> 
 </body>
 </html>
