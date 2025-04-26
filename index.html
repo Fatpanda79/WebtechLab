@@ -31,8 +31,8 @@
         {
             border:none;
             border-radius: 5px;
-            color: rgb(0, 53, 63);
-            background-color: greenyellow;
+            color: rgb(0, 234, 133);
+            background-color: rgb(0, 0, 0);
             margin-top: 15px;
             width: 80px;
             height: 20px;
@@ -41,6 +41,7 @@
         }
         #registration{
             border: 5px solid;
+            border-radius: 20px;
             width: 600px;
             height: 300px;
             background-color: #fdfdfd;
@@ -69,57 +70,75 @@
             content-visibility: hidden;
             display: none;
         }
+        .image{
+            content-visibility: visible;
+            animation:0.5s ease-out;
+            font-size: 5em;
+        }
+        #registration:hover .image{
+            content-visibility: hidden;
+            display: none;
+        }
         #cloud{
             color: white;
             text-shadow: 5px 5px #000000b4;
         }
+        .termschk{
+            display: inline-flex;
+        }
     </style>
 </head>
-<body style="background-color: greenyellow;">
+<body style="background-color: #C4FFDD;margin: 0;">
     <div style="display: flex;flex-wrap: wrap;justify-content: center;">
-    <div style="display: flex;justify-content: center;margin: none;">
+    <div style="width: 100%; margin: 0; padding: 0;height: 70px;">
+    <div style="display: flex;justify-content: center;margin: 0;background-color: #2eff85;">
         <h3 style="font-family: monospace;font-weight: 20px;font-size: 4em;
     color: rgb(0, 0, 0);font-weight: bolder;
     margin-bottom: 10px;margin-top: 2px;">AQI APPLICATION <span id="cloud">☁︎</span> </h3>
     </div>
+    </div>
     <div style="display: flex; justify-content: center; gap: 10px;">
-        <div style="display: flex; flex-direction: column; gap: 10px;">
-            <div style="border: 5px solid; width: 550px; height: 300px;background-color: #fdfdfd;">box1</div>
-            <div style="border: 5px solid; width: 550px; height: 300px;background-color: #fdfdfd;">box2</div>
+        <div style="display: flex; flex-direction: column; gap: 10px;margin-top: 30px;">
+            <div style="border: 5px solid; width: 550px; height: 300px;background-color: #fdfdfd;border-radius: 20px;align-content: center;">box1</div>
+            <div style="border: 5px solid; width: 550px; height: 300px;background-color: #fdfdfd;border-radius: 20px;align-content: center;">box2</div>
         </div>
-        <div style="display: flex; flex-direction: column; gap: 10px;">
+        <div style="display: flex; flex-direction: column; gap: 10px;margin-top: 30px;align-items: center;">
             <div id="registration">
-                <span class="regtext" style="display: flex;justify-content: center; align-items: center;font-family: monospace;">REGISTRATION</span>
-                <form class="form1" id="form1">
-                    <label for="fname" style="margin: 5px;">FirstName</label>
-                    <input id="fname" type="text" style="margin: 5px;" placeholder="FirstName"><span id="fnameerror"></span>
-                    <label for="lname">LastName</label>
-                    <input id="lname" type="text" style="margin: 5px;" placeholder="LastName">
+                <span class="regtext" style="display: flex;justify-content: center; align-items: center;font-family: monospace;">REGISTRATION
+                </span>
+                <div style="display: flex; justify-content: center; align-items: center; margin-top: 10px;">
+                <span class="image"><img src="image.png" alt="" style="width: 100px;height: 100px;"></span>
+                </div>
+                
+                <form class="form1" id="form1" style="margin-top: 30px;">
+                    <label for="fname" style="margin: 5px;">FullName</label>
+                    <input id="fname" type="text" style="margin: 5px;" placeholder="FullName"><span id="fnameerror"></span>
                     <label for="mail" style="margin-left: 5px;">email</label>
-                    <input id="mail" type="email" style="margin: 5px;" placeholder="e-mail">
+                    <input id="mail" type="email" style="margin: 5px;" placeholder="e-mail"><span id="emailerror"></span>
                     <label for="pass" style="margin: 5px;">Password</label>
-                    <input id="pass" type="password" style="margin: 5px;" placeholder="Password">
+                    <input id="pass" type="password" style="margin: 5px;" placeholder="Password"><span id="Passworderror"></span>
                     <label for="Cpass" style="margin: 5px;">Confirm Password</label>
-                    <input id="Cpass" type="password" style="margin: 5px;" placeholder="Confirm_Password">
-                    <br>
-                    <label for="location" style="margin: 5px;">Location</label>
-                    <input id="location" type="text" style="margin: 5px;" placeholder="Location">
-                    <label for="zcode" style="margin: 5px;">zipcode</label>
-                    <input id="zcode" type="text" style="margin: 5px;" placeholder="Location">
-                    <br>
-                    <label for="zcode" style="margin: 5px;">List of Preffered City</label>
+                    <input id="Cpass" type="password" style="margin: 5px;" placeholder="Confirm_Password"><span id="confirmpassworderror"></span>
+                    
+                    <label for="zcode" style="margin: 5px;">Zipcode</label>
+                    <input id="zcode" type="text" style="margin: 5px;" placeholder="Zipcode"><span id="ziperror"></span>
+                    
+                    <label for="zcode" style="margin: 5px;">Location</label>
                     <select id="city" style="box-shadow: 5px 5px 5px lightblue;">
                         <option value="Dhaka">Dhaka</option>
                         <option value="Dhaka">Chattogram</option>
                         <option value="Dhaka">Sylhet</option>
                         <option value="Dhaka">Rajshahi</option>
                     </select>
+                    <div class="termschk"><input id="terms" type="checkbox" style="margin-top: 20px;">
+                    <label style="margin-top: 20px;margin-left: 10px;">Agree to terms and consditions</label></div>
+                    <span id="termerror"></span>
                     <button type="submit" id="submit">submit</button>
                     
 
                 </form>
             </div>
-            <div style="border: 5px solid; width: 600px; height: 300px;background-color: #fdfdfd;">box4</div>
+            <div style="border: 5px solid; width: 600px; height: 300px;background-color: #fdfdfd;border-radius: 20px;align-content: center;">box4</div>
         </div>
     </div> 
     </div>  
