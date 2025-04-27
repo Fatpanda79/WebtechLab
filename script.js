@@ -154,16 +154,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             
         })
-        /*if(!checkPass(confirmpassword.value) && (Password.value != confirmpassword.value))
-        {
-                valid=false;
-                confirmpassworderror.innerHTML = "Error: Match the password";
-                confirmpassworderror.style.color = "red";
-            }
-            else
-            {
-                confirmpassworderror.innerHTML="";
-        }*/
        if(confirmpassword.value == "")
        {
         valid=false;
