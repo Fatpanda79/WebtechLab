@@ -1,9 +1,14 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Air Quality Index Application </title>
+    <link rel="stylesheet" href="aqi.css">
+    <link rel="stylesheet" href="box4.css">
     <style>
         label{
             font-family: monospace;
@@ -20,7 +25,8 @@
             justify-items: center;
             align-items: center;
             font-family:  monospace;
-            border-radius: 5px;
+            border-radius: 5px; 
+
         }
         form{
             display: flex;
@@ -86,6 +92,15 @@
         .termschk{
             display: inline-flex;
         }
+        #box4{
+            display:flex;
+            justify-content:center;
+            flex-direction:column;
+            align-items:center;
+            padding-left: 30%;
+            padding-right:30%;
+        }
+        
     </style>
 </head>
 <body style="background-color: #C4FFDD;margin: 0;">
@@ -99,7 +114,59 @@
     </div>
     <div style="display: flex; justify-content: center; gap: 10px;">
         <div style="display: flex; flex-direction: column; gap: 10px;margin-top: 30px;">
-            <div style="border: 5px solid; width: 550px; height: 300px;background-color: #fdfdfd;border-radius: 20px;align-content: center;">box1</div>
+            <div id="bg" style="border: 5px solid; width: 550px; height: 400px;background-color: #fdfdfd;border-radius: 20px;align-content: center;">
+                <div id="table" >
+                    <p style="display: flex;justify-content: center;font-weight: bold;font-size: 25px;margin: 0;">AQI DATA OF CITIES</p>
+                    <table>
+                        <tr>
+                            <th>City</th>
+                            <th>AQI</th>
+                        </tr>
+                        <tr>
+                            <td>DHAKA</td>
+                            <td>11</td>
+                        </tr>
+                        <tr>
+                            <td>Chattogram</td>
+                            <td>9</td>
+                        </tr>
+                        <tr>
+                            <td>Sylhet</td>
+                            <td>10</td>
+                        </tr>
+                        <tr>
+                            <td>Rajshahi</td>
+                            <td>9</td>
+                        </tr>
+                        <tr>
+                            <td>Bogura</td>
+                            <td>7.8</td>
+                        </tr>
+                        <tr>
+                            <td>Khulna</td>
+                            <td>8</td>
+                        </tr>
+                        <tr>
+                            <td>Rangpur</td>
+                            <td>8.2</td>
+                        </tr>
+                        <tr>
+                            <td>Comilla</td>
+                            <td>9.3</td>
+                        </tr>
+                        <tr>
+                            <td>Pabna</td>
+                            <td>7.8</td>
+                        </tr>
+                        <tr>
+                            <td>Feni</td>
+                            <td>8.8</td>
+                        </tr>
+                        
+                    </table>
+                </div>
+
+            </div>
             <div style="border: 5px solid; width: 550px; height: 300px;background-color: #fdfdfd;border-radius: 20px;align-content: center;">box2</div>
         </div>
         <div style="display: flex; flex-direction: column; gap: 10px;margin-top: 30px;align-items: center;">
@@ -110,38 +177,64 @@
                 <span class="image"><img src="image.png" alt="" style="width: 100px;height: 100px;"></span>
                 </div>
                 
-                <form class="form1" id="form1" style="margin-top: 30px;">
+                <form class="form1" id="form1" style="margin-top: 30px;" action="process.php" method="POST">
                     <label for="fname" style="margin: 5px;">FullName</label>
-                    <input id="fname" type="text" style="margin: 5px;" placeholder="FullName"><span id="fnameerror"></span>
+                    <input name="username" id="fname" type="text" style="margin: 5px;" placeholder="FullName"><span id="fnameerror"></span>
                     <label for="mail" style="margin-left: 5px;">email</label>
-                    <input id="mail" type="email" style="margin: 5px;" placeholder="e-mail"><span id="emailerror"></span>
+                    <input id="mail" type="email" style="margin: 5px;" placeholder="e-mail" name="email"><span id="emailerror"></span>
                     <label for="pass" style="margin: 5px;">Password</label>
-                    <input id="pass" type="password" style="margin: 5px;" placeholder="Password"><span id="Passworderror"></span>
+                    <input id="pass" type="password" style="margin: 5px;" placeholder="Password" name="password"><span id="Passworderror"></span>
                     <label for="Cpass" style="margin: 5px;">Confirm Password</label>
                     <input id="Cpass" type="password" style="margin: 5px;" placeholder="Confirm_Password"><span id="confirmpassworderror"></span>
                     
                     <label for="zcode" style="margin: 5px;">Zipcode</label>
-                    <input id="zcode" type="text" style="margin: 5px;" placeholder="Zipcode"><span id="ziperror"></span>
+                    <input name="zip" id="zcode" type="text" style="margin: 5px; " placeholder="Zipcode" ><span id="ziperror"></span>
                     
-                    <label for="zcode" style="margin: 5px;">Location</label>
-                    <select id="city" style="box-shadow: 5px 5px 5px lightblue;">
+                    <label for="city" style="margin: 5px;">Location</label>
+                    <select name="city" id="city" style="box-shadow: 5px 5px 5px lightblue;">
                         <option value="Dhaka">Dhaka</option>
-                        <option value="Dhaka">Chattogram</option>
-                        <option value="Dhaka">Sylhet</option>
-                        <option value="Dhaka">Rajshahi</option>
+                        <option value="Chattogram">Chattogram</option>
+                        <option value="Sylhet">Sylhet</option>
+                        <option value="Rajshahi">Rajshahi</option>
                     </select>
-                    <div class="termschk"><input id="terms" type="checkbox" style="margin-top: 20px;">
+                    <div class="termschk"><input name="check" id="terms" type="checkbox" style="margin-top: 20px;">
                     <label style="margin-top: 20px;margin-left: 10px;">Agree to terms and consditions</label></div>
                     <span id="termerror"></span>
-                    <button type="submit" id="submit">submit</button>
+                    
+                    <input type="submit" id="submit" name="submit" value="submit"/>
                     
 
                 </form>
             </div>
-            <div style="border: 5px solid; width: 600px; height: 300px;background-color: #fdfdfd;border-radius: 20px;align-content: center;">box4</div>
+
+
+            <div style="border: 5px solid; width: 600px; height: 300px;background-color: #fdfdfd;border-radius: 20px;align-content: center;">
+                <div id="box4">
+                    <label for="fname" style="margin: 5px;">FullName</label>
+                    <input id="fname" type="text" style="margin: 5px;" placeholder="FullName"><span id="fnameerror"></span>
+                    <br>
+                    <label for="pass" style="margin: 5px;">Password</label>
+                    <input id="pass" type="password" style="margin: 5px;" placeholder="Password"><span id="Passworderror"></span>
+                    <br>
+                    <input type="submit" id="submit" name="submit" value="submit"/>
+
+                </div>
+            </div>
         </div>
     </div> 
     </div>  
+    <?php
+
+    if (isset($_POST['confirmed'])) {
+        echo "<h2>Confirmed Successfully</h2>";
+    }
+
+    if (isset($_POST['cancelled'])) {
+        session_unset();
+        session_destroy();
+        echo "<h2>Cancelled. Data discarded.</h2>";
+    }
+    ?>
     
     <script src="script.js"></script> 
 </body>

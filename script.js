@@ -94,8 +94,15 @@ document.addEventListener("DOMContentLoaded", function () {
         } 
        
         FirstName.addEventListener('input',()=>{
+
+            if (FirstName.value.trim() === "") {
+                //e.preventDefault();
+                Fnameerror.innerHTML = "Error: Please fill it";
+                Fnameerror.style.color = "red";
+                valid = false;
+            } 
             
-            if(!checkName(FirstName.value.trim()))
+            else if(!checkName(FirstName.value.trim()))
             {
                 //e.preventDefault();
                 Fnameerror.innerHTML = "Error: Please only use (Alphabets,dot,space)";
@@ -211,18 +218,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         })
         
-       
-        
-        /*if(!checkPass(Password.value))
-        {
-            valid=false;
-            Passworderror.innerHTML = "Error: Please use proper password format(eg:aAb123?!@#%.,)";
-            Passworderror.style.color = "red";
-        }
-        else
-        {
-            Passworderror.innerHTML=""
-        }*/
         if(!valid)
         {
             e.preventDefault();
