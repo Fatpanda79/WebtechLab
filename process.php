@@ -40,6 +40,8 @@
         echo "<br>City: ".$_POST['city'];
         echo "<br>Terms_and_Conditions: ".$_POST['check'];
 
+        
+
 
         /*$username = htmlspecialchars($_POST["username"]);
         $password = htmlspecialchars($_POST["password"]);
@@ -49,6 +51,7 @@
         echo"<p>PASSWORD:$password</p>";
         echo"<p>E-mail:$email</p>";*/
     }
+
     ?>
     <form method="POST" action="index.php">
     <input type="hidden" name="confirmed" value="yes">

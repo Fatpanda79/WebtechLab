@@ -104,6 +104,92 @@ session_start();
     </style>
 </head>
 <body style="background-color: #C4FFDD;margin: 0;">
+
+    <?php
+    /*$Username1 = $_SESSION['username'];
+    $Password = $_SESSION['password'];*/
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "info";
+
+
+    if (isset($_POST["bgcolor"])) {
+        $color = $_POST["bgcolor"];
+        setcookie("bgColor", $color, 0, "/");
+    }
+
+    $UserName = $_SESSION['username'] ?? '';
+    $PassWord = $_SESSION['password'] ?? '';
+    $Email = $_SESSION['email'] ?? '';
+    $City = $_SESSION['city'] ?? '';
+    $Zipcode = $_SESSION['zcode'] ?? '';
+    
+
+    if (isset($_POST['confirmed'])) {
+        //echo "<h2>Confirmed Successfully</h2>";
+        
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        //echo "<h3>$UserName</h3>";
+
+        $sql = "INSERT INTO user(Username,Email,passs,Zipcode,city)
+        VALUES('$UserName','$Email','$PassWord','$Zipcode','$City')";
+
+        if ($conn->query($sql) === TRUE) {
+            //echo "New record created successfully";
+        }
+        else{
+            echo "Error";
+        }
+    }
+
+    if (isset($_POST['cancelled'])) {
+        session_unset();
+        session_destroy();
+        echo "<h2>Cancelled. Data discarded.</h2>";
+    }
+    
+    if (isset($_POST["login"])){
+    $Loginusername = $_POST['Loginusername'];
+    $Loginpassword = $_POST['Loginpassword'];
+    
+    // Create database connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    
+    // Prepare SQL statement to prevent SQL injection
+    $stmt = $conn->prepare("SELECT Username, passs FROM user WHERE Username = ? AND passs = ?");
+    $stmt->bind_param("ss", $Loginusername, $Loginpassword);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    if ($result->num_rows > 0) {
+        // Login successful
+        $_SESSION['username'] = $Loginusername;
+        $_SESSION['logged_in'] = true;
+        header("Location: Info.php");
+        exit();
+    } else {
+        // Login failed
+        echo "<div style='color: red; text-align: center; font-family: monospace;'>Invalid username or password!</div>";
+    }
+    
+    $stmt->close();
+    $conn->close();
+}
+    ?>
+
+
+
+
+
+
+
+
     <div style="display: flex;flex-wrap: wrap;justify-content: center;">
     <div style="width: 100%; margin: 0; padding: 0;height: 70px;">
     <div style="display: flex;justify-content: center;margin: 0;background-color: #2eff85;">
@@ -209,33 +295,119 @@ session_start();
 
 
             <div style="border: 5px solid; width: 600px; height: 300px;background-color: #fdfdfd;border-radius: 20px;align-content: center;">
-                <div id="box4">
+                <form action="index.php" method="POST">
+                    <div id="box4">
                     <label for="fname" style="margin: 5px;">FullName</label>
-                    <input id="fname" type="text" style="margin: 5px;" placeholder="FullName"><span id="fnameerror"></span>
+                    <input name="Loginusername" id="fname" type="text" style="margin: 5px;" placeholder="FullName"><span id="fnameerror"></span>
                     <br>
                     <label for="pass" style="margin: 5px;">Password</label>
-                    <input id="pass" type="password" style="margin: 5px;" placeholder="Password"><span id="Passworderror"></span>
+                    <input name="Loginpassword" id="pass" type="password" style="margin: 5px;" placeholder="Password"><span id="Passworderror"></span>
                     <br>
-                    <input type="submit" id="submit" name="submit" value="submit"/>
+                    <label for="colorPicker" style="margin: 5px;">Choose Background Color</label>
+                    <input type="color" name="bgcolor" id="colorPicker" style="margin: 5px;">
+                    <br>
+                    <input type="submit" id="submit" name="login" value="login"/>
 
                 </div>
+                </form>
             </div>
         </div>
     </div> 
     </div>  
-    <?php
-
-    if (isset($_POST['confirmed'])) {
-        echo "<h2>Confirmed Successfully</h2>";
-    }
-
-    if (isset($_POST['cancelled'])) {
-        session_unset();
-        session_destroy();
-        echo "<h2>Cancelled. Data discarded.</h2>";
-    }
-    ?>
     
-    <script src="script.js"></script> 
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("form1");
+  const fname = document.getElementById("fname");
+  const fnameerror = document.getElementById("fnameerror");
+  const email = document.getElementById("mail");
+  const emailerror = document.getElementById("emailerror");
+  const password = document.getElementById("pass");
+  const passworderror = document.getElementById("Passworderror");
+  const confirmpassword = document.getElementById("Cpass");
+  const confirmpassworderror = document.getElementById("confirmpassworderror");
+  const zipcode = document.getElementById("zcode");
+  const ziperror = document.getElementById("ziperror");
+  const terms = document.getElementById("terms");
+  const termserror = document.getElementById("termerror");
+
+  function checkName(name) {
+    if (name.trim() === "") return false;
+    return /^[A-Za-z.\s]+$/.test(name);
+  }
+
+  function checkEmail(em) {
+    return /^[a-zA-Z0-9._%+-]+@aiub\.edu$/.test(em.trim());
+  }
+
+  function checkPass(pass) {
+    return pass.length >= 5 && /^[A-Za-z\d.,?!@#%]+$/.test(pass);
+  }
+
+  function checkZip(zip) {
+    return /^\d{4}$/.test(zip);
+  }
+
+  function validate() {
+    let valid = true;
+
+    if (!checkName(fname.value)) {
+      fnameerror.textContent = "Please enter a valid name (letters, dots, spaces only)";
+      valid = false;
+    } else {
+      fnameerror.textContent = "";
+    }
+
+    if (!checkEmail(email.value)) {
+      emailerror.textContent = "Please enter a valid AIUB email (e.g., abc123@aiub.edu)";
+      valid = false;
+    } else {
+      emailerror.textContent = "";
+    }
+
+    if (!checkPass(password.value)) {
+      passworderror.textContent = "Password must be 5+ chars and contain allowed symbols (letters, digits, .,?!@#%)";
+      valid = false;
+    } else {
+      passworderror.textContent = "";
+    }
+
+    if (confirmpassword.value !== password.value || confirmpassword.value === "") {
+      confirmpassworderror.textContent = "Passwords do not match";
+      valid = false;
+    } else {
+      confirmpassworderror.textContent = "";
+    }
+
+    if (!checkZip(zipcode.value)) {
+      ziperror.textContent = "Zip code must be exactly 4 digits";
+      valid = false;
+    } else {
+      ziperror.textContent = "";
+    }
+
+    if (!terms.checked) {
+      termserror.textContent = "You must agree to terms and conditions";
+      valid = false;
+    } else {
+      termserror.textContent = "";
+    }
+
+    return valid;
+  }
+
+  form.addEventListener("submit", function (e) {
+    if (!validate()) {
+      e.preventDefault();
+    }
+  });
+
+  // Optional: live validation on input
+  [fname, email, password, confirmpassword, zipcode].forEach(el => {
+    el.addEventListener("input", validate);
+  });
+  terms.addEventListener("change", validate);
+});
+    </script> 
 </body>
 </html>

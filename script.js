@@ -45,7 +45,11 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         return true;
     }
-    const regex = /^[A-Za-z\d]+\@aiub\.edu$/;
+
+    const regex = /^[a-zA-Z0-9._%+-]+@aiub\.edu$/;
+    function checkEmail(em) {
+        return regex.test(em);
+    }
     function checkEmail(em)
     {
         if(regex.test(em))
@@ -123,21 +127,17 @@ document.addEventListener("DOMContentLoaded", function () {
             Emailerror.style.color = "red";
         }
         Email.addEventListener('input',()=>{
-            if (!checkEmail(Email.value))
-                {
-                    valid=false;
-                    //Email.setCustomValidity("Error: Please use proper email format(eg: abc123@aiub.edu)");
-                    //e.preventDefault();
-                    //Email.reportValidity();
-                    Emailerror.innerHTML = "Error: Please use proper email format(eg: abc123@aiub.edu)";
-                    Emailerror.style.color = "red";
-                }
-                else
-                {
-                    Emailerror.innerHTML="";
-                }
+                if (Email.value.trim() === "" || !checkEmail(Email.value.trim()))
+                    {
+                        Emailerror.innerHTML = "Error: Please use proper email format(eg: abc123@aiub.edu)";
+                        Emailerror.style.color = "red";
+                    }
+                    else
+                    {
+                        Emailerror.innerHTML="";
+                    }
 
-        })
+            })
         if(!checkPass(Password.value))
             {
                 valid=false;
@@ -230,4 +230,3 @@ document.addEventListener("DOMContentLoaded", function () {
 
     });
 });
-
