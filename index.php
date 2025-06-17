@@ -401,8 +401,6 @@ session_start();
       e.preventDefault();
     }
   });
-
-  // Optional: live validation on input
   [fname, email, password, confirmpassword, zipcode].forEach(el => {
     el.addEventListener("input", validate);
   });

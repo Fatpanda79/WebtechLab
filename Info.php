@@ -25,7 +25,6 @@ if ($result && $result->num_rows > 0) {
 }
 ?>
 
-<!-- ✅ Form that submits selected cities to nextpage.php -->
 <form id="cityForm" action="show.php" method="POST">
   <div class="container">
     <?php echo $citylabels; ?>
@@ -33,7 +32,6 @@ if ($result && $result->num_rows > 0) {
   </div>
 </form>
 
-<!-- ✅ JS to ensure exactly 10 checkboxes are selected -->
 <script>
   const checkboxes = document.querySelectorAll('.cityCheckbox');
   const confirmBtn = document.getElementById('confirmBtn');

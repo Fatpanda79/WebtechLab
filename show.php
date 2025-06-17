@@ -8,7 +8,6 @@ if (!isset($_POST['cities']) || count($_POST['cities']) !== 10) {
 
 $selectedCities = $_POST['cities'];
 
-// Database connection
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -16,18 +15,14 @@ $dbname = "info";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Handle connection error
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Prepare placeholders for IN clause
 $placeholders = implode(',', array_fill(0, count($selectedCities), '?'));
 
-// SQL with placeholders
 $sql = "SELECT City, Country, AQI FROM info WHERE City IN ($placeholders)";
 
-// Prepare and bind
 $stmt = $conn->prepare($sql);
 $stmt->bind_param(str_repeat('s', count($selectedCities)), ...$selectedCities);
 
