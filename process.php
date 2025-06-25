@@ -5,22 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        #confirm, #cancel {
+            padding: 10px 20px;
+            font-weight: bold;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            border: none;
+            margin: 5px;
+        }
         #confirm{
             background-color: #AAFF00;
-            margin-top: 5px;
             color: black;
-            border: none;
         }
         #cancel{
             background-color:rgb(255, 82, 20);
-            margin-top: 5px;
             color: white;
-            border: none;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        #container{
+            padding: 20px;
+            padding-left:50px;
+            padding-right:50px;
+            background-color:rgb(255, 239, 239);
+            box-shadow: 5px 5px 5px lightblue;
+            border-radius:15px;
         }
 
     </style>
 </head>
 <body>
+    <div id="container">
     <?php
     if(isset($_POST["submit"]))
     {
@@ -53,6 +82,7 @@
     }
 
     ?>
+    <div class="buttons">
     <form method="POST" action="index.php">
     <input type="hidden" name="confirmed" value="yes">
     <button type="submit" name="confirm" id="confirm">Confirm</button>
@@ -62,7 +92,8 @@
     <input type="hidden" name="cancelled" value="yes">
     <button type="submit" name="cancel" id="cancel">Cancel</button>
     </form>
-
+    </div>
+</div>
     
 </body>
 </html>

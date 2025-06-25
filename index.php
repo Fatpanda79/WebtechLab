@@ -106,8 +106,6 @@ session_start();
 <body style="background-color: #C4FFDD;margin: 0;">
 
     <?php
-    /*$Username1 = $_SESSION['username'];
-    $Password = $_SESSION['password'];*/
     $servername = "localhost";
     $username = "root";
     $password = "";
@@ -316,7 +314,7 @@ session_start();
     </div>  
     
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById("form1");
   const fname = document.getElementById("fname");
   const fnameerror = document.getElementById("fnameerror");
@@ -353,6 +351,7 @@ session_start();
 
     if (!checkName(fname.value)) {
       fnameerror.textContent = "Please enter a valid name (letters, dots, spaces only)";
+      fnameerror.style.color = "red";
       valid = false;
     } else {
       fnameerror.textContent = "";
@@ -360,6 +359,7 @@ session_start();
 
     if (!checkEmail(email.value)) {
       emailerror.textContent = "Please enter a valid AIUB email (e.g., abc123@aiub.edu)";
+      emailerror.style.color = "red";
       valid = false;
     } else {
       emailerror.textContent = "";
@@ -367,6 +367,7 @@ session_start();
 
     if (!checkPass(password.value)) {
       passworderror.textContent = "Password must be 5+ chars and contain allowed symbols (letters, digits, .,?!@#%)";
+      passworderror.style.color = "red";
       valid = false;
     } else {
       passworderror.textContent = "";
@@ -374,6 +375,7 @@ session_start();
 
     if (confirmpassword.value !== password.value || confirmpassword.value === "") {
       confirmpassworderror.textContent = "Passwords do not match";
+      confirmpassworderror.style.color = "red";
       valid = false;
     } else {
       confirmpassworderror.textContent = "";
@@ -381,6 +383,7 @@ session_start();
 
     if (!checkZip(zipcode.value)) {
       ziperror.textContent = "Zip code must be exactly 4 digits";
+      ziperror.style.color = "red";
       valid = false;
     } else {
       ziperror.textContent = "";
@@ -388,6 +391,7 @@ session_start();
 
     if (!terms.checked) {
       termserror.textContent = "You must agree to terms and conditions";
+      termserror.style.color="red";
       valid = false;
     } else {
       termserror.textContent = "";

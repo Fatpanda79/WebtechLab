@@ -60,17 +60,18 @@ if ($result && $result->num_rows > 0) {
       font-family: monospace;
     }
 
-    .city-option {
-      display: flex;
-      align-items: center;
-      margin: 5px;
-    }
-
     .container {
       display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      margin: 20px;
+      flex-wrap: wrap;
+      max-width: 500px;
+      margin: 20px auto;
+      gap: 10px;
+    }
+
+    .city-option {
+      flex: 1 0 45%;
+      display: flex;
+      align-items: center;
     }
 
     #confirmBtn {
