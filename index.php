@@ -150,29 +150,24 @@ session_start();
     if (isset($_POST["login"])){
     $Loginusername = $_POST['Loginusername'];
     $Loginpassword = $_POST['Loginpassword'];
-    
-    // Create database connection
+
     $conn = new mysqli($servername, $username, $password, $dbname);
-    
-    // Check connection
+  
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
     
-    // Prepare SQL statement to prevent SQL injection
     $stmt = $conn->prepare("SELECT Username, passs FROM user WHERE Username = ? AND passs = ?");
     $stmt->bind_param("ss", $Loginusername, $Loginpassword);
     $stmt->execute();
     $result = $stmt->get_result();
     
     if ($result->num_rows > 0) {
-        // Login successful
         $_SESSION['username'] = $Loginusername;
         $_SESSION['logged_in'] = true;
         header("Location: Info.php");
         exit();
     } else {
-        // Login failed
         echo "<div style='color: red; text-align: center; font-family: monospace;'>Invalid username or password!</div>";
     }
     
